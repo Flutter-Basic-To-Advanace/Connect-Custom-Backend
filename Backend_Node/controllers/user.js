@@ -38,4 +38,37 @@ exports.getAllUsers = async (req,res) => {
     }
 }
 
-//upda
+//update a user
+exports.updateUser = async (req,res) => {
+    try {
+        const userId = req.params.id.trim();
+        const user = await User.findByIdAndUpdate(userId,req.body,{
+            new : true,
+            runValidators:true
+        });
+
+        if(!user){
+            return res.status(404).json({ message : "User not found" });
+        }else {
+            res.json(user);
+        }
+    } catch (error) {
+        res.status(400).json({ error: error.message})
+    }
+}
+
+//Delete a user
+exports.deleteUser = async (req,res) => {
+    try {
+        const userId = req.params.id.trim();
+        const user = await User.findByIdAndDelete(userId);
+
+        if(!user){
+            return res.status(404).json({ message : "User Not found "});
+        } else{
+            res.json({ message : "User deleted Sucessfully!"})
+        }
+    } catch (error) {
+        res.status(400).json({ error: error.message})
+    }
+}
