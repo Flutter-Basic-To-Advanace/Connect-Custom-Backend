@@ -13,3 +13,29 @@ exports.createUser = async (req,res) => {
     }
 }
 
+exports.GetSingleUser = async (req,res) => {
+    try {
+      const userId = req.params.id.trim();
+      const user = await User.findById(userId);
+      
+      if(!user){
+        return res.status(404).json({ message : "User not found "})
+      } else {
+        res.json(user);
+      }
+    } catch (error) {
+        res.status(400).json({ error : error.message });
+    }
+}
+
+//Get All users
+exports.getAllUsers = async (req,res) => {
+    try {
+        const users = await User.find();
+        res.json(users)
+    } catch (error) {
+        res.status(400).json({ error : error.message})
+    }
+}
+
+//upda
