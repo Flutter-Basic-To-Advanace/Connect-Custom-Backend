@@ -35,10 +35,14 @@ class UserListScreen extends StatelessWidget {
 
               return ListTile(
                 title: Text(user.name),
-                subtitle: Text(user.name),
+                subtitle: Text(user.email),
                 trailing: IconButton(
-                  //TODO:delete user
-                  onPressed: () {},
+                  onPressed: () {
+                    UserProvider.deleteUser(user.id);
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text("User Deleted")));
+                  },
                   icon: const Icon(Icons.delete),
                 ),
               );
