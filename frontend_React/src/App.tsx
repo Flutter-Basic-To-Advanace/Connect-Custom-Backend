@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./app.css"; // import css file
 
 const App = () => {
   // State to track the socket connection
@@ -54,25 +55,22 @@ const App = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black-50 w-screen">
-      <h1 className="text-3xl font-bold mb-4">Websocket Chat</h1>
-      <div className="w-full max-w-md bg-white shadow-md rounded-lg p-4">
-        <div className="h-64 overflow-y-auto border border-gray-300 rounded-lg mb-4 p-2">
+    <div className="app-container">
+      <h1 className="chat-title">Websocket Chat</h1>
+      <div className="chat-box">
+        <div className="messages">
           {messages.map((message, index) => (
-            <div
-              key={index}
-              className="p-2 border-b last:border-b-0 text-black"
-            >
+            <div key={index} className="message">
               {message}
             </div>
           ))}
         </div>
-        <div className="flex">
+        <div className="input-container">
           <input
             type="text"
             value={userMessage}
             onChange={(e) => setUserMessage(e.target.value)}
-            className="flex-grow border border-gray-300 rounded-l-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="input"
             placeholder="Type your message..."
           />
           <button
@@ -80,7 +78,7 @@ const App = () => {
               socket.send(userMessage);
               setUserMessage("");
             }}
-            className="bg-blue-500 text-white rounded-r-lg px-4 hover:bg-blue-600 transition"
+            className="send-button"
           >
             Send
           </button>
