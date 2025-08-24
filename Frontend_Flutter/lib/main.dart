@@ -1,8 +1,15 @@
-import 'package:app_routing/router/router.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend_flutter/provider/user_provider.dart';
+import 'package:frontend_flutter/screen/user_list.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => UserProvider())],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -10,9 +17,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      routerConfig: RouterClass().router,
+      home: const UserListScreen(),
     );
   }
 }

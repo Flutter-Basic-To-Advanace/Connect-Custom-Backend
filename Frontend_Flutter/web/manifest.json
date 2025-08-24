@@ -1,6 +1,6 @@
 {
-    "name": "app_routing",
-    "short_name": "app_routing",
+    "name": "frontend_flutter",
+    "short_name": "frontend_flutter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

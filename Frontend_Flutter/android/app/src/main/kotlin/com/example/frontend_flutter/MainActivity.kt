@@ -1,4 +1,4 @@
-package com.example.app_routing
+package com.example.frontend_flutter
 
 import io.flutter.embedding.android.FlutterActivity
 
