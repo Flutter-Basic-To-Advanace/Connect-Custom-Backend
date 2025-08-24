@@ -4,12 +4,25 @@ import 'package:frontend_flutter/services/user_services.dart';
 
 class UserProvider with ChangeNotifier {
   final UserServices _userServices = UserServices();
-  final List<User> _users = [];
+  List<User> _users = [];
 
   //getter
   List<User> get users => _users;
 
-  //TODO:Fetch users when the provider is initailized
+  //Fetch users when the provider is initailized
+  UserProvider() {
+    fetchAllUsers();
+  }
+
+  //fetch all users
+  Future<void> fetchAllUsers() async {
+    try {
+      _users = await _userServices.getAllUsers();
+      notifyListeners();
+    } catch (error) {
+      print("Failed to fetch users: $error");
+    }
+  }
 
   //create user
   Future<void> addUser(User user) async {

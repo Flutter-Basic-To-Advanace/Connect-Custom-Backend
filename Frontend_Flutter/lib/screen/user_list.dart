@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_flutter/provider/user_provider.dart';
 import 'package:frontend_flutter/screen/add_user.dart';
+import 'package:provider/provider.dart';
 
 class UserListScreen extends StatelessWidget {
   const UserListScreen({super.key});
@@ -20,6 +22,29 @@ class UserListScreen extends StatelessWidget {
             icon: Icon(Icons.add),
           ),
         ],
+      ),
+      body: Consumer<UserProvider>(
+        builder: (context, UserProvider, child) {
+          if (UserProvider.users.isEmpty) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return ListView.builder(
+            itemCount: UserProvider.users.length,
+            itemBuilder: (context, index) {
+              final user = UserProvider.users[index];
+
+              return ListTile(
+                title: Text(user.name),
+                subtitle: Text(user.name),
+                trailing: IconButton(
+                  //TODO:delete user
+                  onPressed: () {},
+                  icon: const Icon(Icons.delete),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }
