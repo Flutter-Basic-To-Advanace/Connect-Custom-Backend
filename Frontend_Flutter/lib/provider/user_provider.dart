@@ -46,4 +46,21 @@ class UserProvider with ChangeNotifier {
       print("Failed to delete user : $error");
     }
   }
+
+  //update user
+  Future<void> updateUser(User user) async {
+    try {
+      await _userServices.updateUser(user);
+
+      //get the index of the updated user
+      int index = _users.indexWhere((userinList) => userinList.id == user.id);
+
+      if (index != -1) {
+        _users[index] = user;
+        notifyListeners();
+      }
+    } catch (error) {
+      print("Failed to update user: $error");
+    }
+  }
 }
